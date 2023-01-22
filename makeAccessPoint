@@ -155,6 +155,30 @@ systemctl enable hostapd
 incErrCode
 [[ $? -eq 0 ]] || error
 
+chmod 644 proj-broadcast.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+chmod 644 proj-server.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+cp proj-broadcast.service /usr/lib/systemd/system/.
+incErrCode
+[[ $? -eq 0 ]] || error
+
+systemctl enable proj-broadcast.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+cp proj-broadcast.server /usr/lib/systemd/system/.
+incErrCode
+[[ $? -eq 0 ]] || error
+
+systemctl enable proj-server.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
 echo "Pi access point configured!"
 echo "--------------------------------"
 echo "To connect to your Pi, do the following:"

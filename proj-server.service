@@ -3,7 +3,7 @@ Description=Start Broadcast server
 After=multi-user.target
 
 [Service]
-ExecStart=/opt/util/ProjComm/server.py
+ExecStart=/opt/utils/ProjComm/server.py
 
 [Install]
 WantedBy=multi-user.target
