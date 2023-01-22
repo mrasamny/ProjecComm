@@ -14,6 +14,7 @@ def get_ip(ifaces=['wlan1', 'eth0', 'wlan0', 'en0']):
         ipv4 = re.search(com, result)
         if ipv4:
             ipv4 = ipv4.groups()[0]
+            ipv4 = ipv4.strip()
             return ipv4
     return ''
 
@@ -28,6 +29,7 @@ def get_broadcast_addr(ip, ifaces=['wlan1', 'eth0', 'wlan0', 'en0']):
         ipv4_broadcast = re.search(com, result)
         if ipv4_broadcast:
             ipv4_broadcast = ipv4_broadcast.groups()[1]
+            ipv4_broadcast = ipv4_broadcast.strip()
             return ipv4_broadcast
     return ''
 
