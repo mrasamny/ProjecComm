@@ -18,6 +18,19 @@ def get_ip(ifaces=['wlan1', 'eth0', 'wlan0', 'en0']):
     return ''
 
 
+def get_broadcast_addr(ip, ifaces=['wlan1', 'eth0', 'wlan0', 'en0']):
+    if isinstance(ifaces, str):
+        ifaces = [ifaces]
+    for iface in list(ifaces):
+        search_str = f'ifconfig {iface}'
+        result = os.popen(search_str).read()
+        com = re.compile(r'(?<=net '+ip+r')(.*) broadcast (.*)', re.M)
+        ipv4_broadcast = re.search(com, result)
+        if ipv4_broadcast:
+            ipv4_broadcast = ipv4_broadcast.groups()[1]
+            return ipv4_broadcast
+    return ''
+
 def is_socket_closed(sock: socket.socket) -> bool:
     try:
         data = sock.recv(16, socket.MSG_DONTWAIT | socket.MSG_PEEK)
