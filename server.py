@@ -17,28 +17,17 @@ if __name__ == "__main__":
         print(e)
         exit(1)
 
-    while True:
-        try:
-            # start broadcast server and wait for query
-            comm.respond_to(hostname, (ip, port))
-        except Exception as e:
-            print(e)
-            break
-
-        try:
-            is_done = False
-            while not is_done:
-                (message, address) = udp_server.recvfrom(1024)
-                message = message.decode()
-                if message == 'goodbye':
-                    is_done = True
-                response = message + " OK!"
-                udp_server.sendto(response.encode(), address)
-        except Exception as e:
-            print(e)
-            print('Server shut down!')
-            break;
-    udp_server.close()
+    try:
+        while True:
+            (message, address) = udp_server.recvfrom(1024)
+            message = message.decode()
+            response = message + " OK!"
+            udp_server.sendto(response.encode(), address)
+    except Exception as e:
+        print(e)
+        print('Server shut down!')
+    finally:
+        udp_server.close()
 
 
   
