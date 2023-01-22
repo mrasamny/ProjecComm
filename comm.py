@@ -24,21 +24,21 @@ def is_socket_closed(sock: socket.socket) -> bool:
         if len(data) == 0:
             return True
     except BlockingIOError as bioe:
-        #print(bioe)
+        # print(bioe)
         return False
     except ConnectionResetError as cre:
-        #print(cre)
+        # print(cre)
         return True
     except BrokenPipeError as bpe:
-        #print(bpe)
+        # print(bpe)
         return True
     except Exception as e:
-        print(e)
+        # print(e)
         return False
     return False
 
 
-def start_tcp_server(ip,port):
+def start_tcp_server(ip, port):
     tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     tcp_server_socket.bind((ip, port))
     tcp_server_socket.listen(1)
@@ -50,7 +50,7 @@ def start_tcp_server(ip,port):
 def start_udp_server(ip, port):
     udp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udp_server_socket.bind((ip, port))
-    #udp_server_socket.setblocking(False);
+    # udp_server_socket.setblocking(False);
     print(f"The UDP server is ready on ({ip}, {port}).")
     return udp_server_socket
 
