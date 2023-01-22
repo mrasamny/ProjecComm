@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import socket
 import comm
 import pickle
