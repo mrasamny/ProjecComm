@@ -168,6 +168,20 @@ systemctl enable hostapd
 incErrCode
 [[ $? -eq 0 ]] || error
 
+# set up ProjComm files
+
+hmod 744 broadcast.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
+chmod 744 server.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
+chmod 744 client.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
 chmod 644 proj-broadcast.service
 incErrCode
 [[ $? -eq 0 ]] || error
