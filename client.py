@@ -1,4 +1,3 @@
-import socket
 import comm
 
 if __name__ == '__main__':
