@@ -2,9 +2,10 @@
 import socket
 import comm
 import pickle
+import time
 
 if __name__ == "__main__":
-
+    time.sleep(20)
     hostname = socket.gethostname()
     broadcast_port = 13000
     ip = comm.get_ip()
