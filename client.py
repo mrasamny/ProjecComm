@@ -1,8 +1,11 @@
 import comm
+import sys
 
 if __name__ == '__main__':
-    # ip = input('Enter IP address:')
-    # port = int(input('Enter port: '))
+    if len(sys.argv) < 2:
+        print(f'SYNOPSIS: {sys.argv[0]} <hostname of machine>')
+        exit(1)
+
     ip = comm.get_ip()
     # port = 12000
     broadcast_addr = comm.get_broadcast_addr(ip)
