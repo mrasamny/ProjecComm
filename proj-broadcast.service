@@ -6,4 +6,4 @@ After=network.target
 ExecStart=/opt/utils/ProjectComm/broadcast.py
 
 [Install]
-
+WantedBy=default.target

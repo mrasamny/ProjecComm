@@ -6,4 +6,4 @@ After=network.target
 ExecStart=/opt/utils/ProjectComm/server.py
 
 [Install]
-
+WantedBy=default.target
