@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import comm
 import re
+import time
 
 
 class Server:
@@ -42,7 +43,7 @@ class Server:
 
 
 if __name__ == "__main__":
-
+    time.sleep(20)  # wait for systemd to complete before starting up server
     udp_server = Server()
     try:
         is_done = False
