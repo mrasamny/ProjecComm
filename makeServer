@@ -55,6 +55,10 @@ chmod 744 server.py
 incErrCode
 [[ $? -eq 0 ]] || error
 
+chmod 744 client.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
 chmod 644 proj-broadcast.service
 incErrCode
 [[ $? -eq 0 ]] || error
@@ -71,7 +75,7 @@ systemctl enable proj-broadcast.service
 incErrCode
 [[ $? -eq 0 ]] || error
 
-cp proj-broadcast.server /usr/lib/systemd/system/.
+cp proj-server.service /usr/lib/systemd/system/.
 incErrCode
 [[ $? -eq 0 ]] || error
 

@@ -7,7 +7,7 @@ if __name__ == '__main__':
     ip = comm.get_ip()
     # port = 12000
     broadcast_addr = comm.get_broadcast_addr(ip)
-    message = 'pacmaners'
+    message = 'froggers'
     server_addr = comm.send_discover_message((broadcast_addr, 13000), message)
     print(f'BROADCAST RESPONSE: {server_addr}')
 

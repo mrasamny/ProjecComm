@@ -1,9 +1,9 @@
 [Unit]
 Description=Start Broadcast server
-After=multi-user.target
+After=network.target
 
 [Service]
 ExecStart=/opt/utils/ProjectComm/broadcast.py
 
 [Install]
-WantedBy=multi-user.target
+
