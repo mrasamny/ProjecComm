@@ -10,6 +10,6 @@ if __name__ == '__main__':
     server_addr = comm.send_discover_message((broadcast_addr, 13000), message)
     print(f'BROADCAST RESPONSE: {server_addr}')
 
-    message = 'goodbye'
+    message = 'hello'
     response = comm.send_udp_message(server_addr, message)
     print(f'RESPONSE: {response}')
