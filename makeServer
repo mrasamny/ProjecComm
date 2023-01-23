@@ -87,6 +87,14 @@ systemctl enable proj-server.service
 incErrCode
 [[ $? -eq 0 ]] || error
 
+systemctl enable vncserver-x11-serviced.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+systemctl enable ssh.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
 echo "Pi access point configured!"
 echo "--------------------------------"
 echo "To connect to your Pi, do the following:"
