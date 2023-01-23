@@ -27,7 +27,7 @@ incErrCode
 [[ $? -eq 0 ]] || error
 
 cp /etc/hosts /tmp/hosts.old
-sed -e 's/raspberrypi/${1}/' /etc/hosts > /tmp/hosts
+sed -e "s/raspberrypi/${1}/" /etc/hosts > /tmp/hosts
 incErrCode
 [[ $? -eq 0 ]] || error
 

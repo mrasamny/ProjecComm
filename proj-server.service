@@ -1,6 +1,6 @@
 [Unit]
 Description=Start server
-After=network.target
+After=multi-user.target.target
 
 [Service]
 ExecStart=/opt/utils/ProjectComm/server.py
