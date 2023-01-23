@@ -1,0 +1,83 @@
+#!/bin/bash -x
+
+hostnamectl set-hostname ${1}
+
+SSID=$(hostname)
+PASS="pemacs.1"
+
+echo "-------------------------------------------"
+echo "Creating a broadcast server on port 13000
+echo " and server on port 12000"
+echo "-------------------------------------------"
+
+errCode=1
+
+function incErrCode()
+{
+  errCode=$(( errCode++ ))
+}
+
+function error()
+{
+  [[ $# -eq 1 ]] && msg=${1}
+  if [[ -n ${msg} ]]
+  then
+    echo "${msg}" >> /tmp/ap-err.txt
+  fi
+  exit ${errCode}
+}
+
+#apt-get update
+#incErrCode
+#[[ $? -eq 0 ]] || error
+
+#apt-get -y upgrade
+#incErrCode
+#[[ $? -eq 0 ]] || error
+
+#apt-get -y dist-upgrade
+#incErrCode
+#[[ $? -eq 0 ]] || error
+
+chmod 744 broadcast.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
+chmod 744 server.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
+chmod 644 proj-broadcast.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+chmod 644 proj-server.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+cp proj-broadcast.service /usr/lib/systemd/system/.
+incErrCode
+[[ $? -eq 0 ]] || error
+
+systemctl enable proj-broadcast.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+cp proj-broadcast.server /usr/lib/systemd/system/.
+incErrCode
+[[ $? -eq 0 ]] || error
+
+systemctl enable proj-server.service
+incErrCode
+[[ $? -eq 0 ]] || error
+
+echo "Pi access point configured!"
+echo "--------------------------------"
+echo "To connect to your Pi, do the following:"
+echo "    1. Plug your Wifi dongle into the Raspberry Pi."
+echo "    2. Connect your laptop Wifi to the ${SSID} access point after reboot."
+echo "    3. Use VNC Player to connect to 10.10.10.10"
+echo ""
+echo "Your Pi will reboot in 5 seconds..."
+sleep 5
+reboot
