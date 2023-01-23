@@ -23,16 +23,16 @@ function error()
 }
 
 hostnamectl set-hostname ${1}
-ncErrCode
+incErrCode
 [[ $? -eq 0 ]] || error
 
 cp /etc/hosts /tmp/hosts.old
 sed -e 's/raspberrypi/${1}/' /etc/hosts > /tmp/hosts
-ncErrCode
+incErrCode
 [[ $? -eq 0 ]] || error
 
 mv /tmp/hosts /etc/hosts
-ncErrCode
+incErrCode
 [[ $? -eq 0 ]] || error
 
 #apt-get update
