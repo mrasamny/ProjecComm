@@ -182,6 +182,10 @@ chmod 744 client.py
 incErrCode
 [[ $? -eq 0 ]] || error
 
+chmod 744 getip.py
+incErrCode
+[[ $? -eq 0 ]] || error
+
 chmod 644 proj-broadcast.service
 incErrCode
 [[ $? -eq 0 ]] || error
