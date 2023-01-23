@@ -1,12 +1,7 @@
 #!/bin/bash -x
 
-hostnamectl set-hostname ${1}
-
-SSID=$(hostname)
-PASS="pemacs.1"
-
 echo "-------------------------------------------"
-echo "Creating a broadcast server on port 13000
+echo "Creating a broadcast server on port 13000"
 echo " and server on port 12000"
 echo "-------------------------------------------"
 
@@ -26,6 +21,19 @@ function error()
   fi
   exit ${errCode}
 }
+
+hostnamectl set-hostname ${1}
+ncErrCode
+[[ $? -eq 0 ]] || error
+
+cp /etc/hosts /tmp/hosts.old
+sed -e 's/raspberrypi/${1}/' /etc/hosts > /tmp/hosts
+ncErrCode
+[[ $? -eq 0 ]] || error
+
+mv /tmp/hosts /etc/hosts
+ncErrCode
+[[ $? -eq 0 ]] || error
 
 #apt-get update
 #incErrCode

@@ -1,8 +1,5 @@
 #!/bin/bash -x
 
-SSID=$(hostname)
-PASS="pemacs.1"
-
 echo "-------------------------------------------"
 echo "Creating an access point with ssid=${SSID}!"
 echo "-------------------------------------------"
@@ -23,6 +20,22 @@ function error()
   fi
   exit ${errCode}
 }
+
+hostnamectl set-hostname ${1}
+ncErrCode
+[[ $? -eq 0 ]] || error
+
+cp /etc/hosts /tmp/hosts.old
+sed -e 's/raspberrypi/${1}/' /etc/hosts > /tmp/hosts
+ncErrCode
+[[ $? -eq 0 ]] || error
+
+mv /tmp/hosts /etc/hosts
+ncErrCode
+[[ $? -eq 0 ]] || error
+
+SSID=$(hostname)
+PASS="pemacs.1"
 
 #apt-get update
 #incErrCode
