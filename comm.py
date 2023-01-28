@@ -2,7 +2,12 @@ import socket
 import re
 import os
 import pickle
-import netifaces
+try:
+    import netifaces
+except ImportError as ie:
+    print(ie)
+    print("run:  pip install netifaces");
+    exit(1)
 
 
 def get_ip():
