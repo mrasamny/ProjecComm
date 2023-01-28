@@ -2,36 +2,34 @@ import socket
 import re
 import os
 import pickle
+import netifaces
 
 
-def get_ip(ifaces=['wlan1', 'eth0', 'wlan0', 'en0']):
-    if isinstance(ifaces, str):
-        ifaces = [ifaces]
-    for iface in list(ifaces):
-        search_str = f'ifconfig {iface}'
-        result = os.popen(search_str).read()
-        com = re.compile(r'(?<=inet )(.*)(?= netmask)', re.M)
-        ipv4 = re.search(com, result)
-        if ipv4:
-            ipv4 = ipv4.groups()[0]
-            ipv4 = ipv4.strip()
-            return ipv4
+def get_ip():
+    interfaces = netifaces.interfaces()
+    ipv4 = []
+    for iface in interfaces:
+        addresses = netifaces.ifaddresses(iface)
+        if netifaces.AF_INET in addresses and addresses[netifaces.AF_INET][0]['addr'] != '127.0.0.1':
+            ipv4.append(addresses[netifaces.AF_INET][0]['addr'])
+
+    if len(ipv4) > 1:
+        return ipv4
+    elif len(ipv4) == 1:
+        return ipv4[0]
     return ''
 
 
-def get_broadcast_addr(ip, ifaces=['wlan1', 'eth0', 'wlan0', 'en0']):
-    if isinstance(ifaces, str):
-        ifaces = [ifaces]
-    for iface in list(ifaces):
-        search_str = f'ifconfig {iface}'
-        result = os.popen(search_str).read()
-        com = re.compile(r'(?<=net '+ip+r')(.*) broadcast (.*)', re.M)
-        ipv4_broadcast = re.search(com, result)
-        if ipv4_broadcast:
-            ipv4_broadcast = ipv4_broadcast.groups()[1]
-            ipv4_broadcast = ipv4_broadcast.strip()
-            return ipv4_broadcast
-    return ''
+def get_broadcast_addr(ip):
+    interfaces = netifaces.interfaces()
+    bcast = ''
+    for iface in interfaces:
+        addresses = netifaces.ifaddresses(iface)
+        if netifaces.AF_INET in addresses and addresses[netifaces.AF_INET][0]['addr'] == ip:
+            bcast = addresses[netifaces.AF_INET][0]['broadcast']
+
+    return bcast
+
 
 def is_socket_closed(sock: socket.socket) -> bool:
     try:
