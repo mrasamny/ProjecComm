@@ -10,5 +10,9 @@ if __name__ == '__main__':
     # port = 12000
     broadcast_addr = comm.get_broadcast_addr(ip)
     message = sys.argv[1]
+    print("Sending message ...")
     server_addr = comm.send_discover_message((broadcast_addr, 13000), message)
-    print(f'BROADCAST RESPONSE: {server_addr[0]}')
+    if len(server_addr) < 1:
+        print("No Response. Make sure serever is running on the network.")
+    else:
+        print(f'BROADCAST RESPONSE: {server_addr[0]}')

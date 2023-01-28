@@ -95,8 +95,18 @@ def send_discover_message(server, message):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    client_socket.sendto(message.encode(), server)
-    response, server_address = client_socket.recvfrom(1048)
+    client_socket.settimeout(3)
+    response = ''
+    tries = 3
+    while len(response) < 1 and tries > 0:
+        try:
+            client_socket.sendto(message.encode(), server)
+            response, server_address = client_socket.recvfrom(1048)
+        except socket.timeout as t:
+            pass
+        tries -= 1
+    if len(response) < 1:
+        return ''
     return pickle.loads(response)
 
 
