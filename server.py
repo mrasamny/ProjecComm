@@ -23,12 +23,12 @@ class Server:
         self.pat = re.compile(r'(.*)(?= OK!$)')
 
     def receive(self, buffer_size=1024):
-        (message, self.client_address) = self.udp_server.recvfrom(buffer_size)
-        message = message.decode()
-        response = message + " OK!"
+        (msg, self.client_address) = self.udp_server.recvfrom(buffer_size)
+        msg = msg.decode()
+        response = msg + " OK!"
         self.udp_server.sendto(response.encode(), self.client_address)
 
-        return message
+        return msg
 
     def send(self, message):
         self.udp_server.sendto(message.encode(), self.client_address)
