@@ -20,6 +20,7 @@ if __name__ == "__main__":
         broadcast_server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         broadcast_server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         broadcast_server.bind(('0.0.0.0', broadcast_port))
+        print(f'Listening on port {broadcast_port} for broadcast {hostname} broadcast requests.')
     except Exception as e:
         print(e)
         exit(2)
@@ -28,7 +29,9 @@ if __name__ == "__main__":
         try:
             (message, address) = broadcast_server.recvfrom(1024)
             if message.decode() == hostname:
-                response = pickle.dumps((ip, server_port))
+                # response = pickle.dumps((ip, server_port))
+                response = ip+":"+str(server_port)
+                response = response.encode()
                 broadcast_server.sendto(response, address)
         except Exception as e:
             print(e)

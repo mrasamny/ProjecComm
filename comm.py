@@ -1,7 +1,7 @@
 import socket
 import re
 import os
-import pickle
+
 try:
     import netifaces
 except ImportError as ie:
@@ -103,15 +103,19 @@ def send_discover_message(server, message):
             client_socket.sendto(message.encode(), server)
             response, server_address = client_socket.recvfrom(1048)
         except socket.timeout as t:
+            print("no response!")
             pass
         tries -= 1
-    if len(response) < 1:
-        return ''
-    return pickle.loads(response)
+
+    return response.decode()
 
 
 def send_udp_message(server, message):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     client_socket.sendto(message.encode(), server)
-    response, server_address = client_socket.recvfrom(1048)
+    client_socket.settimeout(3)
+    try:
+        response, server_address = client_socket.recvfrom(1048)
+    except socket.timeout as t:
+        response = b''
     return response.decode()
