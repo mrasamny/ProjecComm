@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 errCode=1
 
@@ -17,6 +17,10 @@ function error()
   exit ${errCode}
 }
 
+
+pip3 install netifaces
+[[ $? -eq 0 ]] || error
+incErrCode
 
 cp proj-*.service /usr/lib/systemd/system/.
 [[ $? -eq 0 ]] || error
