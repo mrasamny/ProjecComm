@@ -96,7 +96,7 @@ def send_discover_message(server, message):
     client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     client_socket.settimeout(3)
-    response = ''
+    response = b''
     tries = 3
     while len(response) < 1 and tries > 0:
         try:
