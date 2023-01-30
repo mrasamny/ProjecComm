@@ -9,6 +9,7 @@ if __name__ == "__main__":
     hostname = socket.gethostname()
     broadcast_port = 13000
     ip = comm.get_ip()
+
     server_port = 12000
 
     if len(ip) == 0:

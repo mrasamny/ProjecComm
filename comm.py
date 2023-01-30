@@ -19,7 +19,7 @@ def get_ip():
             ipv4.append(addresses[netifaces.AF_INET][0]['addr'])
 
     if len(ipv4) > 1:
-        return ipv4
+        return ipv4[0]   # TODO - this needs to be changed in the future
     elif len(ipv4) == 1:
         return ipv4[0]
     return ''
