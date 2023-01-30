@@ -18,36 +18,6 @@ function error()
 }
 
 
-cd /opt/utils
-[[ $? -eq 0 ]] || error
-incErrCode
-
-rm -rf ProjectComm
-[[ $? -eq 0 ]] || error
-incErrCode
-
-git clone https://github.com/mrasamny/ProjectComm.git
-[[ $? -eq 0 ]] || error
-incErrCode
-
-sleep 1
-
-cd ProjectComm
-[[ $? -eq 0 ]] || error
-incErrCode
-
-chmod go-x *
-[[ $? -eq 0 ]] || error
-incErrCode
-
-chmod u-x *
-[[ $? -eq 0 ]] || error
-incErrCode
-
-chmod u+x broadcast.py server.py
-[[ $? -eq 0 ]] || error
-incErrCode
-
 cp proj-*.service /usr/lib/systemd/system/.
 [[ $? -eq 0 ]] || error
 incErrCode
