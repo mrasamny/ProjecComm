@@ -35,39 +35,19 @@ mv /tmp/hosts /etc/hosts
 incErrCode
 [[ $? -eq 0 ]] || error
 
-#apt-get update
-#incErrCode
-#[[ $? -eq 0 ]] || error
-
-#apt-get -y upgrade
-#incErrCode
-#[[ $? -eq 0 ]] || error
-
-#apt-get -y dist-upgrade
-#incErrCode
-#[[ $? -eq 0 ]] || error
-
-chmod 744 broadcast.py
+apt-get update
 incErrCode
 [[ $? -eq 0 ]] || error
 
-chmod 744 server.py
+apt-get -y upgrade
 incErrCode
 [[ $? -eq 0 ]] || error
 
-chmod 744 client.py
+apt-get -y dist-upgrade
 incErrCode
 [[ $? -eq 0 ]] || error
 
-chmod 744 getip.py
-incErrCode
-[[ $? -eq 0 ]] || error
-
-chmod 644 proj-broadcast.service
-incErrCode
-[[ $? -eq 0 ]] || error
-
-chmod 644 proj-server.service
+pip3 install netifaces
 incErrCode
 [[ $? -eq 0 ]] || error
 
@@ -95,13 +75,9 @@ systemctl enable ssh.service
 incErrCode
 [[ $? -eq 0 ]] || error
 
-echo "Pi access point configured!"
-echo "--------------------------------"
-echo "To connect to your Pi, do the following:"
-echo "    1. Plug your Wifi dongle into the Raspberry Pi."
-echo "    2. Connect your laptop Wifi to the ${SSID} access point after reboot."
-echo "    3. Use VNC Player to connect to 10.10.10.10"
-echo ""
+echo "-----------------------------------"
+echo "       Pi configured!"
 echo "Your Pi will reboot in 5 seconds..."
+echo "-----------------------------------"
 sleep 5
 reboot
