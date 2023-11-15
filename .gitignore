@@ -3,3 +3,6 @@
 /.idea/
 /.idea/*
 /.git
+.DS_Store
+*.class
+__pycache__/
