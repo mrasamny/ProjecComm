@@ -6,7 +6,7 @@ try:
     import netifaces
 except ImportError as ie:
     print(ie)
-    print("run:  pip install netifaces");
+    print("run:  pip3 install netifaces");
     exit(1)
 
 
